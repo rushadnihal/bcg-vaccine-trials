@@ -48,8 +48,9 @@ draw_forest <- function() {
   text(col_x, k + 2, c("Lat.", "TB+", "TB-", "TB+", "TB-"), cex = 0.8)
   text(c(-8.75, -5.25), k + 3, c("Vaccinated", "Control"), cex = 0.8)
   par(font = 1)
-  text(log(c(0.25, 2.5)), k + 2, c("\u2190 Favours vaccine", "Favours control \u2192"),
-       cex = 0.7, col = "grey30")
+  # Anchor at RR = 1: pos = 2 extends left of the line, pos = 4 extends right
+  text(0, k + 2, "\u2190 Favours vaccine", pos = 2, cex = 0.7, col = "grey30")
+  text(0, k + 2, "Favours control \u2192", pos = 4, cex = 0.7, col = "grey30")
   par(op)
 }
 

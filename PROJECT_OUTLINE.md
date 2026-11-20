@@ -88,7 +88,7 @@ bcg-vaccine-trials/
 - [x] 00 Setup runs cleanly
 - [x] 01 Data prep + effect sizes
 - [x] 02 FE vs RE models
-- [ ] 03 Forest plot
+- [x] 03 Forest plot
 - [ ] 04 Heterogeneity
 - [ ] 05 Meta-regression
 - [ ] 06 Publication bias + sensitivity
