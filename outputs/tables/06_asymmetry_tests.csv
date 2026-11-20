@@ -1,0 +1,4 @@
+test,statistic,p_value
+Egger's regression test,z = -0.80,0.4217845356722275
+"Egger's regression test, adjusted for latitude",z = -0.60,0.549205905742415
+Begg & Mazumdar rank correlation,Kendall's τ = 0.03,0.9523619079608663
