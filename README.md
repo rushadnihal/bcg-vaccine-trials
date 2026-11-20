@@ -11,4 +11,4 @@ Random-effects meta-analysis and meta-regression of 13 trials on BCG vaccine eff
 
 ## Data
 
-`metafor::dat.bcg`, from Colditz et al. (1994), *JAMA* 271(9):698–702.
+`metadat::dat.bcg` (companion data package to `metafor`), from Colditz et al. (1994), *JAMA* 271(9):698–702.

@@ -4,7 +4,7 @@
 # Every other script sources this file first.
 # =============================================================================
 
-packages <- c("metafor", "here", "dplyr", "readr")
+packages <- c("metafor", "metadat", "here", "dplyr", "readr")
 
 missing <- packages[!packages %in% rownames(installed.packages())]
 if (length(missing) > 0) {

@@ -17,7 +17,7 @@ Estimate the pooled effect of the BCG vaccine on tuberculosis risk across 13 ran
 
 ## 3. Data
 
-- **Source:** `metafor::dat.bcg` (Colditz et al., 1994, *JAMA*). Built into the package, so there's nothing to download.
+- **Source:** `metadat::dat.bcg` (shipped with `metafor` via the `metadat` package; Colditz et al., 1994, *JAMA*). Built into the package, so there's nothing to download.
 - **Size:** 13 trials × 9 variables.
 
 | Variable | Description |

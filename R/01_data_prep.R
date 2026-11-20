@@ -7,7 +7,7 @@
 source(here::here("R", "00_setup.R"))
 
 # --- Load data ---------------------------------------------------------------
-bcg <- metafor::dat.bcg
+bcg <- metadat::dat.bcg  # metafor >= 4.0 keeps its datasets in metadat
 str(bcg)
 
 # --- Effect sizes: log risk ratio (vaccinated vs control) --------------------
