@@ -6,3 +6,4 @@
 reports/*_files/
 reports/.quarto/
 reports/logs/
+*.rds

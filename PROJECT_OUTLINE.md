@@ -85,8 +85,8 @@ bcg-vaccine-trials/
 
 ## 8. Progress checklist
 
-- [ ] 00 Setup runs cleanly
-- [ ] 01 Data prep + effect sizes
+- [x] 00 Setup runs cleanly
+- [x] 01 Data prep + effect sizes
 - [ ] 02 FE vs RE models
 - [ ] 03 Forest plot
 - [ ] 04 Heterogeneity
