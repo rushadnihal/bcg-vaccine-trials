@@ -89,7 +89,7 @@ bcg-vaccine-trials/
 - [x] 01 Data prep + effect sizes
 - [x] 02 FE vs RE models
 - [x] 03 Forest plot
-- [ ] 04 Heterogeneity
+- [x] 04 Heterogeneity
 - [ ] 05 Meta-regression
 - [ ] 06 Publication bias + sensitivity
 - [ ] 07 Quarto report

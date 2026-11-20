@@ -68,7 +68,7 @@ write_csv(est_tbl, file.path(dir_tables, "04_tau2_estimators.csv"))
 est_fmt <- est_tbl |>
   transmute(
     Estimator            = paste0(estimator, " (", method, ")"),
-    `tau²`               = sprintf("%.3f", tau2),
+    `\u03c4\u00b2`       = sprintf("%.3f", tau2),
     `I² (%)`             = sprintf("%.1f", i2),
     `Pooled RR (95% CI)` = sprintf("%.2f (%.2f, %.2f)", rr, ci_lower, ci_upper)
   )
@@ -98,8 +98,8 @@ draw_baujat <- function() {
   plot(bj$x, bj$y, pch = 19, col = ifelse(bj$notable, "black", "grey60"),
        xlim = c(0, max(bj$x) * 1.05), ylim = c(-0.08, 1.1) * max(bj$y),
        xlab = "Contribution to overall heterogeneity (Q)",
-       ylab = "Influence on the pooled estimate", las = 1)
-  grid(col = "grey85")
+       ylab = "Influence on the pooled estimate", las = 1,
+       panel.first = grid(col = "grey85"))   # grid behind the points
   text(lab$x, lab$y, paste0(lab$study, " [", lab$ids, "]"), pos = lab$pos, cex = 0.75, offset = 0.6)
   legend("topleft", bty = "n", cex = 0.75, text.col = "grey40",
          legend = "Grey points: trials with little contribution or influence")
@@ -134,7 +134,7 @@ report_heading(rpt, "Heterogeneity statistics")
 report_table(rpt, het_fmt, caption = "Table 4. Heterogeneity statistics (random-effects model, REML; Q-profile 95% CIs)")
 report_text(rpt, paste0(
   "- **Q**: test of whether all trials share one true effect.\n",
-  "- **tau² / tau**: between-trial variance / SD of the true log risk ratios.\n",
+  "- **\u03c4\u00b2 / \u03c4**: between-trial variance / SD of the true log risk ratios.\n",
   "- **I²**: share of total variability due to true between-trial differences rather than chance.\n",
   "- **H²**: ratio of total variability to sampling variability (1 = no heterogeneity)."
 ))
@@ -145,7 +145,7 @@ report_text(rpt,
   " (p ", ifelse(fit_re$QEp < 0.0001, "< 0.0001", sprintf("= %.4f", fit_re$QEp)), "), and an estimated ",
   sprintf("%.1f", i2$estimate), "% of the variability (95% CI ", sprintf("%.1f to %.1f", i2$ci_lower, i2$ci_upper),
   "%) reflects real differences between trials rather than sampling error. ",
-  "With tau = ", sprintf("%.2f", tau$estimate), " on the log scale, the true risk ratio in a typical trial setting ",
+  "With \u03c4 = ", sprintf("%.2f", tau$estimate), " on the log scale, the true risk ratio in a typical trial setting ",
   "could plausibly be anywhere from about ", sprintf("%.2f", exp(as.numeric(fit_re$beta) - 1.96 * tau$estimate)),
   " to ", sprintf("%.2f", exp(as.numeric(fit_re$beta) + 1.96 * tau$estimate)),
   ". ",
@@ -153,10 +153,10 @@ report_text(rpt,
   else "The I² interval is wide, but ",
   "so a single pooled RR on its own is not an adequate summary.")
 
-report_heading(rpt, "Sensitivity to the tau² estimator")
-report_table(rpt, est_fmt, caption = "Table 5. tau² and pooled RR under different estimators")
+report_heading(rpt, "Sensitivity to the \u03c4\u00b2 estimator")
+report_table(rpt, est_fmt, caption = "Table 5. \u03c4\u00b2 and pooled RR under different estimators")
 report_text(rpt,
-  "tau² ranges from ", sprintf("%.2f", min(est_tbl$tau2)), " to ", sprintf("%.2f", max(est_tbl$tau2)),
+  "\u03c4\u00b2 ranges from ", sprintf("%.2f", min(est_tbl$tau2)), " to ", sprintf("%.2f", max(est_tbl$tau2)),
   " across estimators, ",
   if (sprintf("%.2f", min(est_tbl$rr)) == sprintf("%.2f", max(est_tbl$rr)))
     paste0("while the pooled RR is ", sprintf("%.2f", est_tbl$rr[1]), " under every estimator")
