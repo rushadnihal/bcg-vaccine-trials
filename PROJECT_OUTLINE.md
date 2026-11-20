@@ -91,7 +91,7 @@ bcg-vaccine-trials/
 - [x] 03 Forest plot
 - [x] 04 Heterogeneity
 - [x] 05 Meta-regression
-- [ ] 06 Publication bias + sensitivity
+- [x] 06 Publication bias + sensitivity
 - [ ] 07 Quarto report
 - [ ] README written with key figure and conclusion
 - [ ] Pin repo on GitHub profile
