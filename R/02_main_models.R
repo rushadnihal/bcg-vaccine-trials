@@ -56,6 +56,7 @@ print(comparison)
 write_csv(comparison, file.path(dir_tables, "02_model_comparison.csv"))
 
 fmt_ci  <- function(est, lo, hi) sprintf("%.2f (%.2f, %.2f)", est, lo, hi)
+fmt_ci_text <- function(est, lo, hi) sprintf("%.2f, 95%% CI %.2f to %.2f", est, lo, hi)
 fmt_p   <- function(p) ifelse(p < 0.0001, "< 0.0001", sprintf("%.4f", p))
 
 comparison_fmt <- comparison |>
@@ -101,7 +102,7 @@ report_text(rpt, "_RR < 1 favours vaccination. PI = prediction interval for the 
 report_heading(rpt, "Interpretation")
 report_text(rpt,
   "Under the random-effects model, vaccination was associated with an estimated **",
-  round(100 * (1 - re$rr)), "% lower risk of TB** (RR ", fmt_ci(re$rr, re$ci_lower, re$ci_upper), "). ",
+  round(100 * (1 - re$rr)), "% lower risk of TB** (RR ", fmt_ci_text(re$rr, re$ci_lower, re$ci_upper), "). ",
   "Heterogeneity was substantial (I² = ", sprintf("%.1f", re$i2), "%, Q(", re$q_df, ") = ",
   sprintf("%.1f", re$q), ", p ", ifelse(re$q_p < 0.0001, "< 0.0001", paste("=", sprintf("%.4f", re$q_p))), ").")
 
@@ -114,7 +115,7 @@ report_text(rpt,
   "This is why explaining the heterogeneity (step 5: meta-regression on latitude) matters.")
 
 report_text(rpt,
-  "The fixed-effect estimate (RR ", fmt_ci(fe$rr, fe$ci_lower, fe$ci_upper), ") is closer to 1 because it is dominated by the largest trials: ",
+  "The fixed-effect estimate (RR ", fmt_ci_text(fe$rr, fe$ci_lower, fe$ci_upper), ") is closer to 1 because it is dominated by the most precise trials (weight depends on the number of TB events, not just sample size): ",
   top$Study, " alone receives ", top$`Weight FE (%)`, "% of the fixed-effect weight but only ",
   top$`Weight RE (%)`, "% under random effects. Given the heterogeneity, the random-effects model is the primary analysis.")
 
