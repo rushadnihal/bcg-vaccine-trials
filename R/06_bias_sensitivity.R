@@ -27,7 +27,8 @@ draw_funnel <- function() {
   funnel(
     fit_re,
     level   = c(90, 95, 99),
-    shade   = c("white", "grey55", "grey75"),
+    shade   = c("white", "grey88", "grey72"),   # p > .10, .05-.10, .01-.05
+    back    = "grey55",                          # p < .01 (outside the contours)
     refline = 0,
     legend  = TRUE,
     atransf = exp,

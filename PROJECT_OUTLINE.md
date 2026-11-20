@@ -93,7 +93,7 @@ bcg-vaccine-trials/
 - [x] 05 Meta-regression
 - [x] 06 Publication bias + sensitivity
 - [ ] 07 Quarto report
-- [ ] README written with key figure and conclusion
+- [x] README written with key figure and conclusion
 - [ ] Pin repo on GitHub profile
 
 ## Reference
