@@ -83,7 +83,16 @@ lat_null <- -fit_lat$beta[1] / fit_lat$beta[2]
 
 # --- 3. Bubble plot ----------------------------------------------------------
 fig_file <- "bubble_plot_latitude.png"
-label_ids <- which(dat$trial %in% c(4, 8))   # the two trials driving heterogeneity (step 4)
+# Label the two trials that drive heterogeneity (step 4), using leader lines into
+# empty areas of the plot so labels don't clip or sit on top of other bubbles.
+# Positions are in plot coordinates: x = latitude, y = log RR.
+callouts <- tibble(
+  trial = c(8, 4),
+  lab_x = c(20, 45),
+  lab_y = log(c(1.85, 0.14)),
+  adj_x = c(0, 1)               # 0 = text starts at lab_x, 1 = text ends at lab_x
+) |>
+  left_join(dat |> select(trial, ablat, yi, study), by = "trial")
 
 draw_bubble <- function() {
   par(mar = c(5, 5, 2, 2))
@@ -96,11 +105,15 @@ draw_bubble <- function() {
     pi       = TRUE,
     shade    = TRUE,
     legend   = TRUE,
-    label    = label_ids,
-    labsize  = 0.75,
     xlab     = "Absolute latitude (degrees)",
     ylab     = "Risk ratio (log scale)"
   )
+  for (i in seq_len(nrow(callouts))) {
+    cl <- callouts[i, ]
+    gap <- ifelse(cl$adj_x == 0, -0.4, 0.4)   # stop the line just short of the text
+    segments(cl$ablat, cl$yi, cl$lab_x + gap, cl$lab_y, col = "grey40")
+    text(cl$lab_x, cl$lab_y, cl$study, adj = c(cl$adj_x, 0.5), cex = 0.8)
+  }
 }
 
 png(file.path(dir_figures, fig_file), width = 8, height = 6, units = "in", res = 300)

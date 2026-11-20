@@ -90,7 +90,7 @@ bcg-vaccine-trials/
 - [x] 02 FE vs RE models
 - [x] 03 Forest plot
 - [x] 04 Heterogeneity
-- [ ] 05 Meta-regression
+- [x] 05 Meta-regression
 - [ ] 06 Publication bias + sensitivity
 - [ ] 07 Quarto report
 - [ ] README written with key figure and conclusion
