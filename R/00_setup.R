@@ -8,10 +8,13 @@ packages <- c("metafor", "metadat", "here", "dplyr", "readr")
 
 missing <- packages[!packages %in% rownames(installed.packages())]
 if (length(missing) > 0) {
-  install.packages(missing)
+  # A CRAN mirror must be set explicitly when running via Rscript
+  install.packages(missing, repos = "https://cloud.r-project.org")
 }
 
-invisible(lapply(packages, library, character.only = TRUE))
+suppressPackageStartupMessages(
+  invisible(lapply(packages, library, character.only = TRUE))
+)
 
 # --- Paths -------------------------------------------------------------------
 dir_data    <- here::here("data", "processed")

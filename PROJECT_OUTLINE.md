@@ -58,6 +58,7 @@ These are approximate values from the `metafor` documentation; small differences
 bcg-vaccine-trials/
 ├── PROJECT_OUTLINE.md      # this file
 ├── README.md               # public-facing summary (fill in at the end)
+├── run.sh                  # terminal runner: ./run.sh [step ...]
 ├── bcg-vaccine-trials.Rproj
 ├── R/                      # numbered analysis scripts, run in order
 ├── data/processed/         # derived data (effect sizes)
@@ -69,7 +70,8 @@ bcg-vaccine-trials/
 
 ## 6. Conventions
 
-- Open `bcg-vaccine-trials.Rproj` before running anything; all paths go through `here::here()`.
+- Run from the terminal with `./run.sh` (all steps) or `./run.sh 01` (one step), or open `bcg-vaccine-trials.Rproj` in RStudio. All paths go through `here::here()`.
+- Scripts must work non-interactively (`Rscript`): save figures with `png()` / `dev.off()` and tables with `write_csv()`, never rely on the Plots pane.
 - Run scripts in numeric order. Each script sources `R/00_setup.R` so it can also run on its own.
 - Figures: PNG, 300 dpi, roughly 8 × 6 in.
 - Report RRs on the ratio scale (back-transformed with `exp`), with 95% CIs, rounded to 2 decimals.

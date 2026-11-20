@@ -6,8 +6,17 @@ Random-effects meta-analysis and meta-regression of 13 trials on BCG vaccine eff
 
 ## How to run
 
-1. Open `bcg-vaccine-trials.Rproj` in RStudio.
-2. Run the scripts in `R/` in numeric order (`00_setup.R` installs any missing packages).
+**From the terminal** (from anywhere):
+
+```bash
+./run.sh          # run every script in R/ in order
+./run.sh 01       # run a single step
+./run.sh 02 03    # run selected steps
+```
+
+**From RStudio:** open `bcg-vaccine-trials.Rproj` and source the scripts in `R/` in numeric order.
+
+`00_setup.R` installs any missing packages on first run.
 
 ## Data
 
