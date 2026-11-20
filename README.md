@@ -30,9 +30,23 @@ Random-effects meta-analysis and meta-regression of 13 controlled trials of the 
 
 Each script writes a Markdown report to `reports/`, CSV tables to `outputs/tables/` and figures to `outputs/figures/`.
 
+### Figures
+
 <p align="center">
   <img src="outputs/figures/forest_plot.png" width="85%" alt="Forest plot">
+  <br><em>Forest plot, trials ordered by latitude (step 3)</em>
 </p>
+
+<table>
+  <tr>
+    <td width="50%"><img src="outputs/figures/baujat_plot.png" alt="Baujat plot"></td>
+    <td width="50%"><img src="outputs/figures/funnel_plot.png" alt="Funnel plot"></td>
+  </tr>
+  <tr>
+    <td align="center"><em>Baujat plot: trials driving heterogeneity (step 4)</em></td>
+    <td align="center"><em>Contour-enhanced funnel plot (step 6)</em></td>
+  </tr>
+</table>
 
 ## How to run
 
