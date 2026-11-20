@@ -18,19 +18,18 @@ fit_re <- rma(yi, vi, data = dat, method = "REML", slab = study)
 fig_file <- "forest_plot.png"
 k        <- fit_re$k
 
-# Label for the pooled row, with heterogeneity statistics
-mlab <- bquote(paste(
-  "RE model (REML): ",
-  tau^2, " = ", .(sprintf("%.2f", fit_re$tau2)), ", ",
-  I^2, " = ", .(sprintf("%.1f", fit_re$I2)), "%, ",
-  "Q(", .(k - 1), ") = ", .(sprintf("%.1f", fit_re$QE)),
-  ", p ", .(ifelse(fit_re$QEp < 0.0001, "< 0.0001", sprintf("= %.4f", fit_re$QEp)))
-))
+# Label for the pooled row, with heterogeneity statistics (plain text;
+# plotmath expressions are not accepted by forest() in recent metafor versions)
+mlab <- sprintf(
+  "RE model (REML): \u03c4\u00b2 = %.2f, I\u00b2 = %.1f%%, Q(%d) = %.1f, p %s",
+  fit_re$tau2, fit_re$I2, k - 1, fit_re$QE,
+  ifelse(fit_re$QEp < 0.0001, "< 0.0001", sprintf("= %.4f", fit_re$QEp))
+)
 
 col_x <- c(-11.5, -9.5, -8, -6, -4.5)   # x positions: latitude, TB+/TB- (vacc), TB+/TB- (ctrl)
 
 draw_forest <- function() {
-  par(mar = c(4, 4, 1, 2))
+  par(mar = c(4, 4, 3, 2))
   forest(
     fit_re,
     atransf   = exp,
@@ -45,11 +44,13 @@ draw_forest <- function() {
     shade     = TRUE,
     xlab      = "Risk Ratio (log scale)"
   )
-  par(font = 2)
+  op <- par(xpd = NA, font = 2)   # xpd = NA: allow text outside the plot region
   text(col_x, k + 2, c("Lat.", "TB+", "TB-", "TB+", "TB-"), cex = 0.8)
   text(c(-8.75, -5.25), k + 3, c("Vaccinated", "Control"), cex = 0.8)
   par(font = 1)
-  text(log(c(0.25, 4)), -2.6, c("Favours vaccine", "Favours control"), cex = 0.75, col = "grey30")
+  text(log(c(0.25, 2.5)), k + 2, c("\u2190 Favours vaccine", "Favours control \u2192"),
+       cex = 0.7, col = "grey30")
+  par(op)
 }
 
 png(file.path(dir_figures, fig_file), width = 10, height = 6.5, units = "in", res = 300)
