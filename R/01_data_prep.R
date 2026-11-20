@@ -62,4 +62,37 @@ cat("Total participants:", sum(bcg_es$n_vacc + bcg_es$n_ctrl), "\n")
 cat("Trials with RR < 1:", sum(bcg_es$rr < 1), "of", nrow(bcg_es), "\n")
 cat("Latitude range:", paste(range(bcg_es$ablat), collapse = " to "), "degrees\n")
 
-message("01_data_prep.R complete. Outputs saved to data/processed and outputs/tables.")
+# --- Report ------------------------------------------------------------------
+rpt <- report_start("01_data_prep", "Step 1: Data Preparation and Effect Sizes")
+
+report_heading(rpt, "Data")
+report_text(rpt,
+  "Source: `metadat::dat.bcg` (Colditz et al., 1994, *JAMA*). ",
+  nrow(bcg_es), " trials of the BCG vaccine against tuberculosis, with ",
+  format(sum(bcg_es$n_vacc + bcg_es$n_ctrl), big.mark = ","),
+  " participants in total.")
+
+report_heading(rpt, "Effect measure")
+report_text(rpt,
+  "Log risk ratio (vaccinated vs control), computed with `metafor::escalc(measure = \"RR\")`. ",
+  "RR < 1 means a lower TB risk in the vaccinated group.")
+
+report_heading(rpt, "Summary")
+report_text(rpt, paste0(
+  "- Trials with RR < 1: **", sum(bcg_es$rr < 1), " of ", nrow(bcg_es), "**\n",
+  "- Trial-level RR range: ", sprintf("%.2f to %.2f", min(bcg_es$rr), max(bcg_es$rr)), "\n",
+  "- Absolute latitude range: ", paste(range(bcg_es$ablat), collapse = " to "), " degrees\n",
+  "- Allocation methods: ", paste(names(table(bcg_es$alloc)), table(bcg_es$alloc),
+                                 sep = " = ", collapse = ", ")
+))
+
+report_heading(rpt, "Trial characteristics")
+report_table(rpt, trial_table, caption = "Table 1. Characteristics and risk ratios of the 13 BCG trials")
+
+report_heading(rpt, "Files written")
+report_text(rpt, paste0(
+  "- `data/processed/bcg_effect_sizes.csv`\n",
+  "- `outputs/tables/01_trial_characteristics.csv`"
+))
+
+message("01_data_prep.R complete. Report saved to reports/01_data_prep.md")

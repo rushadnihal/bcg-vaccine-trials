@@ -65,12 +65,13 @@ bcg-vaccine-trials/
 ├── outputs/
 │   ├── figures/            # PNGs for README / report
 │   └── tables/             # CSV results tables
-└── reports/                # Quarto report + rendered HTML
+└── reports/                # per-step Markdown reports, console logs, final Quarto report
 ```
 
 ## 6. Conventions
 
 - Run from the terminal with `./run.sh` (all steps) or `./run.sh 01` (one step), or open `bcg-vaccine-trials.Rproj` in RStudio. All paths go through `here::here()`.
+- Every script writes a Markdown report to `reports/NN_name.md` with the report helpers in `00_setup.R` (`report_start`, `report_heading`, `report_text`, `report_table`, `report_figure`). `run.sh` also saves each script's full console output to `reports/logs/NN_name.log`.
 - Scripts must work non-interactively (`Rscript`): save figures with `png()` / `dev.off()` and tables with `write_csv()`, never rely on the Plots pane.
 - Run scripts in numeric order. Each script sources `R/00_setup.R` so it can also run on its own.
 - Figures: PNG, 300 dpi, roughly 8 × 6 in.

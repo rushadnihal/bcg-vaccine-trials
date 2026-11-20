@@ -8,7 +8,7 @@
 #
 # Stops at the first script that errors.
 # -----------------------------------------------------------------------------
-set -euo pipefail
+set -euo pipefail   # pipefail: a failing Rscript still stops the run despite tee
 
 # Always run from the project root, wherever this is called from
 cd "$(dirname "$0")"
@@ -33,13 +33,18 @@ else
   done
 fi
 
+mkdir -p reports/logs
+
 for s in "${scripts[@]}"; do
+  name=$(basename "$s" .R)
   echo ""
   echo "=================================================================="
   echo " Running $s"
   echo "=================================================================="
-  Rscript "$s"
+  # Show output on screen and keep a full console log in reports/logs/
+  Rscript "$s" 2>&1 | tee "reports/logs/${name}.log"
 done
 
 echo ""
 echo "Done: ${#scripts[@]} script(s) ran successfully."
+echo "Reports: reports/*.md   Console logs: reports/logs/*.log"
