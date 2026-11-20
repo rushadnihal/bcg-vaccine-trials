@@ -68,7 +68,7 @@ write_csv(est_tbl, file.path(dir_tables, "04_tau2_estimators.csv"))
 est_fmt <- est_tbl |>
   transmute(
     Estimator            = paste0(estimator, " (", method, ")"),
-    `\u03c4\u00b2`       = sprintf("%.3f", tau2),
+    `τ²`       = sprintf("%.3f", tau2),
     `I² (%)`             = sprintf("%.1f", i2),
     `Pooled RR (95% CI)` = sprintf("%.2f (%.2f, %.2f)", rr, ci_lower, ci_upper)
   )
